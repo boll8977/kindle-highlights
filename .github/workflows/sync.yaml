@@ -7,10 +7,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Move My Clippings.txt to resources
+      - name: List files for debugging
+        run: ls -R
+
+      - name: Move My_Clippings.txt to resources
         run: |
           mkdir -p resources
-          mv My\ Clippings.txt resources/
+          mv My_Clippings.txt resources/
 
       - name: Sync highlights
         uses: addnab/docker-run-action@v3
