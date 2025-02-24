@@ -7,21 +7,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: List files for debugging
-        run: ls -R
-
-      - name: Move My_Clippings.txt to resources
-        run: |
-          mkdir -p resources
-          mv My_Clippings.txt resources/
-
       - name: Sync highlights
         uses: addnab/docker-run-action@v3
         with:
           image: ghcr.io/arkalim/kindle-to-notion:master
           run: node /code/dist/main.js
           options: |
-            -v ${{ github.workspace }}/resources:/code/resources 
+            -v ${{ github.workspace }}:/code/resources 
             -e BOOK_DB_ID=${{ vars.BOOK_DB_ID }}
             -e NOTION_API_KEY=${{ secrets.NOTION_API_KEY }}
 
